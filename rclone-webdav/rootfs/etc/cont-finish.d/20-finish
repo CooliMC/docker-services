@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv sh
+
+source /etc/colors.sh
+
+PREFFIX="[cont-finish.d] $(s6-basename ${0}):"
+
+#s6-svc -d /var/run/s6/services/rclone-mount
+#s6-svc -wD /var/run/s6/services/rclone-mount
+
+echo -e "${PREFFIX} ${Yellow}waiting for shutdown of all services${Color_Off}"
+#wait for all services to be down
+s6-svwait -D /var/run/s6/services/*
+
+#awk '/efsgoogle:/ && /\'$ENVIRON["MountPoint"]'/ {print; exit 1}' /proc/mounts
