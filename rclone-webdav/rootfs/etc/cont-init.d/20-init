@@ -39,8 +39,8 @@ AutoUpgrade(){
 
 #create folders
 mkdir -p \
-  $MountPoint \
-  $ConfigDir
+  $ConfigDir \
+  $CacheDir
 
 #export ConfigPath="$ConfigDir/$ConfigName env"
 printf "$ConfigDir/$ConfigName" > /var/run/s6/container_environment/ConfigPath

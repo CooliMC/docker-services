@@ -4,13 +4,20 @@
 
 source /etc/colors.sh
 
-PREFFIX="[services.d] [rclone-mount]-$(s6-basename ${0}):"
+PREFFIX="[services.d] [rclone-webdav]-$(s6-basename ${0}):"
 
-echo -e "${PREFFIX} ${Green}starting rclone mount $(date +%Y.%m.%d-%T)${Color_Off}"
+echo -e "${PREFFIX} ${Green}starting rclone webdav $(date +%Y.%m.%d-%T)${Color_Off}"
 
 ## ECHO DEBUG
 if [ "$DEBUG" = true ]; then
-    echo -e "${PREFFIX} [DEBUG] command: /usr/sbin/rclone --config $ConfigPath mount $RemotePath $MountPoint $MountCommands"
+    echo -e "${PREFFIX} [DEBUG] command: /usr/sbin/rclone --config $ConfigPath serve webdav $RemotePath $ExtendedCommands"
 fi
 
-/usr/sbin/rclone --config $ConfigPath mount $RemotePath $MountPoint $MountCommands
+## Check ReadOnly mode
+if [ "$ReadOnly" = "true" ]; then
+    /usr/sbin/rclone --config $ConfigPath serve webdav $RemotePath --addr "$WebdavAddr:$WebdavPort" --cache-dir $CacheDir --read-only $ExtendedCommands
+else
+    /usr/sbin/rclone --config $ConfigPath serve webdav $RemotePath --addr "$WebdavAddr:$WebdavPort" --cache-dir $CacheDir $ExtendedCommands
+fi
+
+

@@ -7,14 +7,15 @@ ARG OVERLAY_ARCH="amd64"
 ENV DEBUG="false" \
     GOPATH="/go" \
     GO111MODULE="on" \
-    AccessFolder="/mnt" \
     RemotePath="mediaefs:" \
-    MountPoint="/mnt/mediaefs" \
     ConfigDir="/config" \
-    ConfigName=".rclone.conf" \
-    MountCommands="--allow-other --allow-non-empty" \
-    UnmountCommands="-u -z"
-
+    ConfigName="rclone.conf" \
+	ReadOnly="true" \
+	WebdavAddr="0.0.0.0" \
+	WebdavPort="8080" \
+	CacheDir="/rcache" \
+    ExtendedCommands="--vfs-cache-mode off --no-checksum"
+	
 ## Alpine with Go Git
 RUN apk --no-cache upgrade \
     && apk add --no-cache --update alpine-sdk ca-certificates go git fuse fuse-dev gnupg \
@@ -35,12 +36,8 @@ RUN apk --no-cache upgrade \
 
 COPY rootfs/ /
 
-VOLUME ["/mnt"]
-
 ENTRYPOINT ["/init"]
-#CMD ["/start.sh"]
 
-# Use this docker Options in run
-# --cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfined
-# -v /path/to/config/.rclone.conf:/config/.rclone.conf
-# -v /mnt/mediaefs:/mnt/mediaefs:shared
+# Use this docker options for caching
+# -e ExtendedCommands="--vfs-cache-mode minimal|writes|full"
+# -v /path/to/cache:/rcache
