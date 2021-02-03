@@ -18,7 +18,6 @@ ENV DEBUG="false" \
 ## Ubuntu with Go Git
 RUN echo "Download and install packages" \
     && apt-get update \
-	&& apt-get upgrade \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
 		rclone \
