@@ -51,8 +51,17 @@ The Container uses S6 Overlay, to handle docker stop/restart and also preparing 
 
 
 ## Use your own RcloneCommands with:
+To enable caching for the given RemotePath:
 ```vim
 -e ExtendedCommands="--vfs-cache-mode full --dir-cache-time 48h --poll-interval 5m --buffer-size 256M"
+```
+
+To enable username/password authentication for the webdav server:
+```vim
+-e ExtendedCommands="--user USERNAME --pass PASSWORD"
+```
+```vim
+-e ExtendedCommands="--htpasswd PASSWORD_FILE_PATH"
 ```
 
 All Commands can be found at [https://rclone.org/commands/rclone_serve_webdav/](https://rclone.org/commands/rclone_serve_webdav/). Use `--buffer-size 256M` (dont go too high), when you encounter some "Direct Stream" problems on Plex Server for example.
