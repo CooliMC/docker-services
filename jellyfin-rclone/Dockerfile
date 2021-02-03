@@ -15,10 +15,15 @@ ENV DEBUG="false" \
     ConfigName=".rclone.conf" \
     MountCommands="--allow-other --allow-non-empty"
 
-## Alpine with Go Git
-RUN apk --no-cache upgrade \
-    && apk add --no-cache --update alpine-sdk ca-certificates go git gnupg \
-    && echo "Download and compile rclone" \
+## Ubuntu with Go Git
+RUN echo "Download and install packages" \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+		go \
+        git \
+	    gnupg \
+	&& echo "Download and compile rclone" \
     && go get -v github.com/rclone/rclone@${RCLONE_VERSION} \
     && cp /go/bin/rclone /usr/sbin/ \
     && rm -rf /go || true \
