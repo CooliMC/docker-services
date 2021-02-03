@@ -42,7 +42,7 @@ The Container uses S6 Overlay, to handle docker stop/restart and also preparing 
 |---|--------|----|
 |`RemotePath`="mediaefs:path" | |remote name in your rclone config, can be your crypt remote: + path/foo/bar|
 |`ConfigDir`="/config"| |#INSIDE Container: -v /path/to/config:/config|
-|`ConfigName`=".rclone.conf"| |#INSIDE Container: /config/.rclone.conf|
+|`ConfigName`="rclone.conf"| |#INSIDE Container: /config/rclone.conf|
 |`CacheDir`="/rcache"| |#INSIDE Container: -v /path/to/cache:/rcache|
 |`ReadOnly`="true"| |set the webdav network share to read-only mode|
 |`WebdavAddr`="0.0.0.0"| |set the webdav network share address bind|
