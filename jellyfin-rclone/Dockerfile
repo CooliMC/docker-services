@@ -21,7 +21,7 @@ RUN echo "Download and install packages" \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
-#        rclone \
+        build-essential \
         golang \
         git \
         gnupg \
@@ -33,6 +33,7 @@ RUN echo "Download and install packages" \
 	&& echo "Show LS of /usr/sbin/" \
 	&& echo $(ls -1 /usr/sbin/) \
     && rm -rf /go || true \
+	&& echo "Cleanup the package space" \
     && apt-get purge -y golang git gnupg \
 	&& apt-get autoremove -y \
     && rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*
