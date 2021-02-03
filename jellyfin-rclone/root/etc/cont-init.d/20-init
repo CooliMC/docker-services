@@ -1,7 +1,5 @@
 #!/usr/bin/with-contenv sh
 
-source /etc/colors.sh
-
 PREFFIX="[cont-init.d] $(s6-basename ${0}):"
 
 #ENV
@@ -45,6 +43,6 @@ mkdir -p \
 #export ConfigPath="$ConfigDir/$ConfigName env"
 printf "$ConfigDir/$ConfigName" > /var/run/s6/container_environment/ConfigPath
 
-echo -e "${PREFFIX} ${Blue}installing system updates${Color_Off}"
+echo -e "${PREFFIX} installing system updates"
 DetectOS
 AutoUpgrade
