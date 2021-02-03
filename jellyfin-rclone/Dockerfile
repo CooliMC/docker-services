@@ -12,7 +12,7 @@ ENV DEBUG="false" \
     RemotePath="mediaefs:" \
     MountPoint="/mnt/mediaefs" \
     ConfigDir="/config" \
-    ConfigName=".rclone.conf" \
+    ConfigName="rclone.conf" \
     MountCommands="--allow-other --allow-non-empty"
 
 ## Ubuntu with Go Git
