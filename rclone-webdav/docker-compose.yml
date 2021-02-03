@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+  rclone_webdav:
+    image: coolimc/rclone-webdav:latest
+    restart: unless-stopped
+    container_name: rclone_webdav
+    ports:
+      - 8080:8080
+    volumes:
+      - /path/to/config:/config
+    environment:
+      - RemotePath="mediaefs:"
+      - ReadOnly="true"
+      - ExtendedCommands="--poll-interval 5m --buffer-size 256M"
