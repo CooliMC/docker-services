@@ -20,7 +20,7 @@ RUN echo "Download and install packages" \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
-		go \
+		golang \
         git \
 	    gnupg \
 	&& echo "Download and compile rclone" \
