@@ -21,13 +21,14 @@ RUN echo "Download and install packages" \
 	&& apt-get upgrade \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
-		golang \
-        git \
-	    gnupg \
-	&& echo "Download and compile rclone" \
-    && go get -v github.com/rclone/rclone@${RCLONE_VERSION} \
-    && cp /go/bin/rclone /usr/sbin/ \
-    && rm -rf /go || true \
+		rclone \
+#		golang \
+#        git \
+#	    gnupg \
+#	 && echo "Download and compile rclone" \
+#    && go get -v github.com/rclone/rclone@${RCLONE_VERSION} \
+#    && cp /go/bin/rclone /usr/sbin/ \
+#    && rm -rf /go || true \
     && apt-get purge golang git gnupg -y \
     && rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*
 	
