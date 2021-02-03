@@ -10,10 +10,10 @@ ENV DEBUG="false" \
     RemotePath="mediaefs:" \
     ConfigDir="/config" \
     ConfigName="rclone.conf" \
-	ReadOnly="true" \
-	WebdavAddr="0.0.0.0" \
-	WebdavPort="8080" \
-	CacheDir="/rcache" \
+    ReadOnly="true" \
+    WebdavAddr="0.0.0.0" \
+    WebdavPort="8080" \
+    CacheDir="/rcache" \
     ExtendedCommands="--vfs-cache-mode off --no-checksum"
 	
 ## Alpine with Go Git

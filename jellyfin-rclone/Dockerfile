@@ -1,0 +1,29 @@
+FROM linuxserver/jellyfin:latest
+
+LABEL maintainer="CooliMC"
+
+ARG RCLONE_VERSION="v1.53.3"
+ARG OVERLAY_VERSION="v1.22.1.0"
+ARG OVERLAY_ARCH="amd64"
+
+ENV DEBUG="false" \
+    GOPATH="/go" \
+    GO111MODULE="on" \
+    RemotePath="mediaefs:" \
+    MountPoint="/mnt/mediaefs" \
+    ConfigDir="/config" \
+    ConfigName=".rclone.conf" \
+    MountCommands="--allow-other --allow-non-empty"
+#    UnmountCommands="-u -z"
+
+## Alpine with Go Git
+RUN apk --no-cache upgrade \
+    && apk add --no-cache --update alpine-sdk ca-certificates go git gnupg \
+    && echo "Download and compile rclone" \
+    && go get -v github.com/rclone/rclone@${RCLONE_VERSION} \
+    && cp /go/bin/rclone /usr/sbin/ \
+    && rm -rf /go || true \
+    && apk del alpine-sdk go git gnupg \
+    && rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*
+	
+COPY root/ /
