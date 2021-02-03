@@ -24,6 +24,8 @@ RUN echo "Download and install packages" \
         build-essential \
         golang \
         git \
+        fuse \
+        libfuse-dev \
         gnupg \
     && echo "Download and compile rclone" \
     && go get -v github.com/rclone/rclone@${RCLONE_VERSION} \
