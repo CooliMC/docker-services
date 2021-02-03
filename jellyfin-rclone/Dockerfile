@@ -27,7 +27,8 @@ RUN echo "Download and install packages" \
     && go get -v github.com/rclone/rclone@${RCLONE_VERSION} \
     && cp /go/bin/rclone /usr/sbin/ \
     && rm -rf /go || true \
-    && apk del alpine-sdk go git gnupg \
+    && apt-get purge golang git gnupg \
+	&& apt-get autoremove \
     && rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*
 	
 COPY root/ /
