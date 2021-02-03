@@ -18,6 +18,7 @@ ENV DEBUG="false" \
 ## Ubuntu with Go Git
 RUN echo "Download and install packages" \
     && apt-get update \
+	&& apt-get upgrade \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
 		golang \
@@ -27,7 +28,7 @@ RUN echo "Download and install packages" \
     && go get -v github.com/rclone/rclone@${RCLONE_VERSION} \
     && cp /go/bin/rclone /usr/sbin/ \
     && rm -rf /go || true \
-    && apt-get purge golang git gnupg \
+    && apt-get purge golang git gnupg -y \
 	&& apt-get autoremove -y \
     && rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*
 	
