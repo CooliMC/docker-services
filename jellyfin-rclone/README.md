@@ -7,7 +7,7 @@ This mod adds the rclone package for internal network/cloud storage mount to the
 This mod merges the [linuxserver/docker-jellyfin](https://github.com/linuxserver/docker-jellyfin) and [mumie/rclone-mount](https://github.com/Mumie-hub/docker-services/tree/master/rclone-mount) docker images for internal network and cloud storage mount via the rclone application to the containers file system. The reason for this mod is to prevent the use of mounted host paths with complicated `bind/bind-propagation:shared` volumes to easily share the rclone mounted media libaries with the jellyfin server.
 
 ## Docker compose
-The docker-compose file needs a `devices` entry for rclone fuse filesystem.
+The docker-compose file requires the entries `devices: -/dev/fuse`, `security_opt: -apparmor:unconfined` and `cap_add: -SYS_ADMIN` so that the rclone fuse file system works properly.
 ```
 ---
 version: "3.5"
