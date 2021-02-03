@@ -1,4 +1,4 @@
-# Jellyfin-Rclone - Docker mode for Jellyfin with an internal rclone mount
+# Jellyfin-Rclone - Jellyfin with an internal Rclone mount
 
 This mod adds the rclone package for internal network/cloud storage mount to the Jellyfin Docker container.
 
