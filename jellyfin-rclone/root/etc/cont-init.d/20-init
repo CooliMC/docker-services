@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv sh
+#!/usr/bin/with-contenv bash
 
 PREFFIX="[cont-init.d] $(s6-basename ${0}):"
 
