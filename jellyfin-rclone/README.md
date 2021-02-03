@@ -1,6 +1,10 @@
-# Jellyfin-AMD - Docker mode for Jellyfin
+# Jellyfin-Rclone - Docker mode for Jellyfin with an internal rclone mount
 
-This mode adds the mesa libraries (v20.1+) needed for hardware encoding (VAAPI) on AMD GPUs to the Jellyfin Docker container.
+This mod adds the rclone package for internal network/cloud storage mount to the Jellyfin Docker container.
+
+## Merges Images
+
+This mode merges the [linuxserver/docker-jellyfin](https://github.com/linuxserver/docker-jellyfin) and [mumie/rclone-mount](https://github.com/Mumie-hub/docker-services/tree/master/rclone-mount) docker images for internal network and cloud storage mount via the rclone application to the containers file system. The reason for this mod is to prevent the use of mounted host paths with complicated `bind/bind-propagation:shared` volumes to share the rclone mounted media libaries with the jellyfin server.
 
 ## Docker compose
 The docker-compose file needs a `devices` entry for jellyfin ([Official Documentation](https://jellyfin.org/docs/general/administration/hardware-acceleration.html))
