@@ -28,7 +28,7 @@ RUN echo "Download and install packages" \
     && cp /go/bin/rclone /usr/sbin/ \
     && rm -rf /go || true \
     && apt-get purge golang git gnupg \
-	&& apt-get autoremove \
+	&& apt-get autoremove -y \
     && rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*
 	
 COPY root/ /
