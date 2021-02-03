@@ -27,13 +27,8 @@ RUN echo "Download and install packages" \
         gnupg \
     && echo "Download and compile rclone" \
     && go get -v github.com/rclone/rclone@${RCLONE_VERSION} \
-	&& echo "Show LS of /go/bin/rclone" \
-	&& echo $(ls -1 /go/bin/rclone) \
     && cp /go/bin/rclone /usr/sbin/ \
-	&& echo "Show LS of /usr/sbin/" \
-	&& echo $(ls -1 /usr/sbin/) \
     && rm -rf /go || true \
-	&& echo "Cleanup the package space" \
     && apt-get purge -y golang git gnupg \
 	&& apt-get autoremove -y \
     && rm -rf /tmp/* /var/cache/apk/* /var/lib/apk/lists/*
