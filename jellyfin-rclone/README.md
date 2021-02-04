@@ -88,9 +88,9 @@ Under server administration in `Server > Libaries` the mounted rclone volume can
 | Variable | Application | Description |
 |---|--------|----|
 |`RemotePath`="mediaefs:path" | Rclone |Remote name in your rclone config, can be your crypt remote: + path/foo/bar|
-|`MountPoint`="/mnt/mediaefs"| Rclone |#INSIDE Container: mounting path of the RemotePath cloud/network storage|
-|`ConfigDir`="/rconfig"| Rclone |#INSIDE Container: -v /path/to/config:/rconfig|
-|`ConfigName`="rclone.conf"| Rclone |#INSIDE Container: /rconfig/rclone.conf|
+|`MountPoint`="/mnt/mediaefs"| Rclone |Mounting path of the RemotePath cloud/network storage|
+|`ConfigDir`="/rconfig"| Rclone |Configuration file path for rclone|
+|`ConfigName`="rclone.conf"| Rclone |Configuration file name for rclone|
 |`MountCommands`="--allow-other --allow-non-empty"| Rclone |Default mount commands (overwrite on parse)|
 |`PUID`="1000"| Jellyfin |Specify the user PUID for mounted host volume reads/writes|
 |`PGID`="1000"| Jellyfin |Specify the group PGID for mounted host volume reads/writes|
