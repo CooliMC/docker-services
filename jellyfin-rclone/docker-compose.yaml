@@ -23,7 +23,7 @@ services:
       - MountPoint=/mnt/mediaefs
       - ConfigDir=/rconfig
       - ConfigName=rclone.conf
-      - MountCommands="--allow-other --allow-non-empty" #optional
+      - MountCommands=--allow-other --allow-non-empty #optional
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
