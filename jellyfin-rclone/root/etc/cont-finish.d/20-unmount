@@ -8,17 +8,3 @@ PREFFIX="[cont-finish.d] $(s6-basename ${0}):"
 echo -e "${PREFFIX} ${Yellow}waiting for shutdown of all services${Color_Off}"
 #wait for all services to be down
 s6-svwait -D /var/run/s6/services/*
-
-
-#check if rclone gracefully unmounted
-#if grep -Eq ''$RemotePath'.*'$MountPoint'|'$MountPoint'.*'$RemotePath'' /proc/mounts; then
-#    echo -e "${PREFFIX} ${Red}force unmounting with fusermount $UnmountCommands at: $(date +%Y.%m.%d-%T)${Color_Off}"
-#    fusermount $UnmountCommands $MountPoint
-#    wait ${!}
-#    exit 1
-#else
-#    #cleanup of mount namespace
-#    umount $MountPoint
-#    echo -e "${PREFFIX} ${Green}successful unmounted${Color_Off}"
-#    exit 0
-#fi

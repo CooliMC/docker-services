@@ -11,7 +11,7 @@ ENV DEBUG="false" \
     GO111MODULE="on" \
     RemotePath="mediaefs:" \
     MountPoint="/mnt/mediaefs" \
-    ConfigDir="/config" \
+    ConfigDir="/rconfig" \
     ConfigName="rclone.conf" \
     MountCommands="--allow-other --allow-non-empty"
 
