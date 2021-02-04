@@ -87,7 +87,7 @@ Under server administration in `Server > Libaries` the mounted rclone volume can
 ## Environment Variables:
 | Variable | Application | Description |
 |---|--------|----|
-|`RemotePath`="mediaefs:path" | Rclone |Remote name in your rclone config, can be your crypt remote: + path/foo/bar|
+|`RemotePath`="mediaefs:path" | Rclone |Remote name in your rclone config plus remote path|
 |`MountPoint`="/mnt/mediaefs"| Rclone |Mounting path of the RemotePath cloud/network storage|
 |`ConfigDir`="/rconfig"| Rclone |Configuration file path for rclone|
 |`ConfigName`="rclone.conf"| Rclone |Configuration file name for rclone|
