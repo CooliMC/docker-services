@@ -8,8 +8,8 @@ This mod merges the [linuxserver/docker-jellyfin](https://github.com/linuxserver
 
 ## Docker compose
 The docker-compose file requires the entries `devices: -/dev/fuse`, `security_opt: -apparmor:unconfined` and `cap_add: -SYS_ADMIN` so that the rclone fuse file system works properly.
+
 ```
----
 version: "3.5"
 services:
   jellyfin_rclone:
