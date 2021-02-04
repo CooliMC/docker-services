@@ -84,6 +84,20 @@ docker run -d \
 ## Settings in Jellyfin
 Under server administration in `Server > Libaries` the mounted rclone volume can be added via its dedicated `MountPoint="/mnt/mediaefs"`. For example, a mounted cloude storage with a movie folder called `movies` could be added as the jellyfin movies library with its `/mnt/mediaefs/movies` path.
 
+## Environment Variables:
+| Variable | Application | Description |
+|---|--------|----|
+|`RemotePath`="mediaefs:path" | Rclone |Remote name in your rclone config, can be your crypt remote: + path/foo/bar|
+|`MountPoint`="/mnt/mediaefs"| Rclone |#INSIDE Container: mounting path of the RemotePath cloud/network storage|
+|`ConfigDir`="/rconfig"| Rclone |#INSIDE Container: -v /path/to/config:/rconfig|
+|`ConfigName`="rclone.conf"| Rclone |#INSIDE Container: /rconfig/rclone.conf|
+|`MountCommands`="--allow-other --allow-non-empty"| Rclone |Default mount commands (overwrite on parse)|
+|`PUID`="1000"| Jellyfin |Specify the user PUID for mounted host volume reads/writes|
+|`PGID`="1000"| Jellyfin |Specify the group PGID for mounted host volume reads/writes|
+|`TZ`="Europe/London"| Jellyfin |Specify a timezone to use (e.g. Europe/London)|
+|`UMASK_SET`="<022>"| Jellyfin |Umask subtracts from permissions based on it's value|
+|`JELLYFIN_PublishedServerUrl`="192.168.2.1"| Jellyfin |Set the autodiscovery response domain or IP address|
+
 ## Building the image
 ```
 docker build --no-cache -t coolimc/jellyfin-rclone .
