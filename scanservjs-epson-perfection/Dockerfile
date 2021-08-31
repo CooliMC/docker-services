@@ -44,6 +44,18 @@ RUN apt-get update \
     /etc/ImageMagick-6/policy.xml \
   && npm install -g npm@7.11.2
 
+# Copy and install the properitary drivers for armv7
+COPY drivers/ "$APP_DIR/"
+RUN apt-get install xsltproc libsane \
+  && *.armv7l.deb/install.sh \
+  && sed -i 's/^epson$/#epson/' /etc/sane.d/dll.conf \
+  && sed -i 's/^epson2$/#epson2/' /etc/sane.d/dll.conf \
+  && sed -i 's/^epsonds$/#epsonds/' /etc/sane.d/dll.conf \
+  && sed -i '/^#epson$/i epkowa' /etc/sane.d/dll.conf \
+  && echo "usb 0x04b8 0x013d" >> /etc/sane.d/epkowa.conf \
+  && sed -i '/^# Wildcard:.*/i # Epson Perfection V39' /lib/udev/rules.d/60-libsane.rules \
+  && sed -i '/^# Wildcard:.*/i ATTRS{idVendor}=="04b8", ATTRS{idProduct}=="013d", ENV{libsane_matched}="yes"\n' /lib/udev/rules.d/60-libsane.rules
+
 # Create a known user
 RUN groupadd -g $GID -o $UNAME
 RUN useradd -o -u $UID -g $GID -m -s /bin/bash $UNAME
@@ -59,18 +71,6 @@ ENV \
   DEVICES="" \
   # Override OCR language
   OCR_LANG=""
-
-# Copy and install the properitary drivers for armv7
-COPY drivers/ "$APP_DIR/"
-RUN apt-get install xsltproc libsane \
-  && *.armv7l.deb/install.sh \
-  && sed -i 's/^epson$/#epson/' /etc/sane.d/dll.conf \
-  && sed -i 's/^epson2$/#epson2/' /etc/sane.d/dll.conf \
-  && sed -i 's/^epsonds$/#epsonds/' /etc/sane.d/dll.conf \
-  && sed -i '/^#epson$/i epkowa' /etc/sane.d/dll.conf \
-  && echo "usb 0x04b8 0x013d" >> /etc/sane.d/epkowa.conf \
-  && sed -i '/^# Wildcard:.*/i # Epson Perfection V39' /lib/udev/rules.d/60-libsane.rules \
-  && sed -i '/^# Wildcard:.*/i ATTRS{idVendor}=="04b8", ATTRS{idProduct}=="013d", ENV{libsane_matched}="yes"\n' /lib/udev/rules.d/60-libsane.rules
 
 # Copy entry point
 COPY run.sh /run.sh
