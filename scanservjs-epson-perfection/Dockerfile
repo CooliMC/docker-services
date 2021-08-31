@@ -63,7 +63,6 @@ ENV \
 # Copy and install the properitary drivers for armv7
 COPY drivers/*.armv7l.deb.tar.gz "$APP_DIR/"
 RUN apt-get install xsltproc libsane \
-  && tar -xzvf *.armv7l.deb.tar.gz \
   && *.armv7l.deb/install.sh \
   && sed -i 's/^epson$/#epson/' /etc/sane.d/dll.conf \
   && sed -i 's/^epson2$/#epson2/' /etc/sane.d/dll.conf \
