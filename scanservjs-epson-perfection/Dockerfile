@@ -69,7 +69,7 @@ RUN apt-get install xsltproc libsane \
   && sed -i 's/^epson2$/#epson2/' /etc/sane.d/dll.conf \
   && sed -i 's/^epsonds$/#epsonds/' /etc/sane.d/dll.conf \
   && sed -i '/^#epson$/i epkowa' /etc/sane.d/dll.conf \
-  && echo "usb 0x04b8 0x013d" >> /etc/sane.d/epkowa.conf
+  && echo "usb 0x04b8 0x013d" >> /etc/sane.d/epkowa.conf \
   && sed -i '/^# Wildcard:.*/i # Epson Perfection V39' /lib/udev/rules.d/60-libsane.rules \
   && sed -i '/^# Wildcard:.*/i ATTRS{idVendor}=="04b8", ATTRS{idProduct}=="013d", ENV{libsane_matched}="yes"\n' /lib/udev/rules.d/60-libsane.rules
 
