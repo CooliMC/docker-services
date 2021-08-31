@@ -44,6 +44,9 @@ RUN apt-get update \
     /etc/ImageMagick-6/policy.xml \
   && npm install -g npm@7.11.2
 
+# Switch the user to install all the necesarry drivers
+USER root
+
 # Copy and install the properitary drivers for armv7
 COPY drivers/ "$APP_DIR/"
 RUN apt-get install xsltproc libsane \
@@ -55,6 +58,9 @@ RUN apt-get install xsltproc libsane \
   && echo "usb 0x04b8 0x013d" >> /etc/sane.d/epkowa.conf \
   && sed -i '/^# Wildcard:.*/i # Epson Perfection V39' /lib/udev/rules.d/60-libsane.rules \
   && sed -i '/^# Wildcard:.*/i ATTRS{idVendor}=="04b8", ATTRS{idProduct}=="013d", ENV{libsane_matched}="yes"\n' /lib/udev/rules.d/60-libsane.rules
+  
+# Switch back to the default user for secruity
+USER $UNAME
 
 # Create a known user
 RUN groupadd -g $GID -o $UNAME
