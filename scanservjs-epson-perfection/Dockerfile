@@ -61,7 +61,7 @@ ENV \
   OCR_LANG=""
 
 # Copy and install the properitary drivers for armv7
-COPY drivers/*.armv7l.deb.tar.gz "$APP_DIR/"
+COPY drivers/ "$APP_DIR/"
 RUN apt-get install xsltproc libsane \
   && *.armv7l.deb/install.sh \
   && sed -i 's/^epson$/#epson/' /etc/sane.d/dll.conf \
