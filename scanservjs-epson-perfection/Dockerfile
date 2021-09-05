@@ -44,23 +44,20 @@ RUN apt-get update \
     /etc/ImageMagick-6/policy.xml \
   && npm install -g npm@7.11.2
 
-# Switch the user to install all the necesarry drivers
-USER root
-
 # Copy and install the properitary drivers for armv7
-COPY drivers/ "$APP_DIR/"
-RUN apt-get install xsltproc libsane \
-  && *.armv7l.deb/install.sh \
+RUN apt-get install -yq xsltproc libsane wget \
+  && mkdir -p /tmp/epson \
+  && wget https://download2.ebz.epson.net/epsonscan2/common/deb/arm/epsonscan2-bundle-6.6.2.4.armv7l.deb.tar.gz -P /tmp/epson \
+  && tar -xzvf /tmp/epson/*.armv7l.deb.tar.gz -C /tmp/epson \
+  && chmod +x /tmp/epson/*.armv7l.deb/install.sh \
+  && /tmp/epson/*.armv7l.deb/install.sh \
   && sed -i 's/^epson$/#epson/' /etc/sane.d/dll.conf \
   && sed -i 's/^epson2$/#epson2/' /etc/sane.d/dll.conf \
   && sed -i 's/^epsonds$/#epsonds/' /etc/sane.d/dll.conf \
   && sed -i '/^#epson$/i epkowa' /etc/sane.d/dll.conf \
   && echo "usb 0x04b8 0x013d" >> /etc/sane.d/epkowa.conf \
   && sed -i '/^# Wildcard:.*/i # Epson Perfection V39' /lib/udev/rules.d/60-libsane.rules \
-  && sed -i '/^# Wildcard:.*/i ATTRS{idVendor}=="04b8", ATTRS{idProduct}=="013d", ENV{libsane_matched}="yes"\n' /lib/udev/rules.d/60-libsane.rules
-  
-# Switch back to the default user for secruity
-USER $UNAME
+  && sed -i '/^# Wildcard:.*/i ATTRS{idVendor}=="04b8", ATTRS{idProduct}=="013d", ENV{libsane_matched}="yes"\n' /lib/udev/rules.d/60-libsane.r>
 
 # Create a known user
 RUN groupadd -g $GID -o $UNAME
