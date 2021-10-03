@@ -2,7 +2,7 @@ FROM linuxserver/jellyfin:latest
 
 LABEL maintainer="CooliMC"
 
-ARG RCLONE_VERSION="v1.53.3"
+ARG RCLONE_VERSION="v1.56.2"
 ARG OVERLAY_VERSION="v1.22.1.0"
 ARG OVERLAY_ARCH="amd64"
 
